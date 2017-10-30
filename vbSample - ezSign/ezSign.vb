@@ -22,17 +22,17 @@ Private Sub phabletSample_Load(ByVal sender As System.Object, ByVal e As System.
 
    phabletDevice.FontSize = 12.0
 
-   '
-   ' Buttons are created on the phabletDevice. The size of the buttons are a function of the 
-   ' FontSize specified. Therefore, if you want to place the buttons in a location relative to the Phablet screen, 
-   ' for example, on the right edge of the Phablet display, Create the button invisible ( 5th argument is 0 )obtain the 
-   ' size (Bounds) of the button after creating it, and use that size to determine the location.
-   ' An example of this is shown for the Ok button, which is placed on the right edge of the Phablet device
-   '
+      '
+      ' Buttons are created on the phabletDevice. The size of the buttons are a function of the 
+      ' FontSize specified. Therefore, if you want to place the buttons in a location relative to the Phablet screen, 
+      ' for example, on the right edge of the Phablet display, Create the button invisible ( 5th argument is 0 ) obtain the 
+      ' size (Bounds) of the button after creating it, and use that size to determine the location.
+      ' An example of this is shown for the Ok button, which is placed on the right edge of the Phablet device
+      '
 
-   ' ButtonText, Event #, x position, y position:
-   '
-   phabletDevice.CreateButton("Clear", idClearButton, 4, 4, 0)
+      ' ButtonText, Event #, x position, y position:
+      '
+      phabletDevice.CreateButton("Clear", idClearButton, 4, 4, 0)
 
    '
    ' The event ID ( 2nd parameter) of the button is up to the developer. You can specify any value, when you recieve the
