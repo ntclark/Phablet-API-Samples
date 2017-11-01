@@ -22,7 +22,7 @@
     <ManifestKeyFile>vbSample_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>false</GenerateManifests>
     <TargetZone>LocalIntranet</TargetZone>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -239,6 +239,10 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)\$(ConfigurationName)"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)$(ConfigurationName)"
+copy "$(TargetDir)AxInterop.*" "$(SolutionDir)$(ConfigurationName)"
+copy "$(TargetDir)Interop.*" "$(SolutionDir)$(ConfigurationName)"
+copy "$(TargetDir)*.Interop.*" "$(SolutionDir)$(ConfigurationName)"
+copy "$(TargetDir)*.exe.config" "$(SolutionDir)$(ConfigurationName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

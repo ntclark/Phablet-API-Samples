@@ -93,58 +93,58 @@ End Sub
 
 Public Function getWorkbook(ByVal fileName As String) As Excel.Workbook
 
-   excelApplicationWasActive = False
+      excelApplicationWasActive = False
 
-   Try
+      Try
 
-   excelApp = Marshal.GetActiveObject("Excel.Application")
+         excelApp = Marshal.GetActiveObject("Excel.Application")
 
-   excelApplicationWasActive = True
+         excelApplicationWasActive = True
 
-   Catch theError As System.Runtime.InteropServices.COMException
+      Catch theError As System.Runtime.InteropServices.COMException
 
-   System.Console.WriteLine(theError.Message)
+         System.Console.WriteLine(theError.Message)
 
-   End Try
+      End Try
 
-   Dim wb As Excel.Workbook = Nothing
+      Dim wb As Excel.Workbook = Nothing
 
-   lastWorkbookWasOpen = False
+      lastWorkbookWasOpen = False
 
-   If excelApp Is Nothing Then
+      If excelApp Is Nothing Then
 
-      wb = GetObject(fileName)
+         wb = GetObject(fileName)
 
-      excelApp = wb.Application
+         excelApp = wb.Application
 
-   Else
+      Else
 
-      Dim workBooks As Excel.Workbooks = excelApp.Workbooks
+         Dim workBooks As Excel.Workbooks = excelApp.Workbooks
 
-      Dim testWb As Object = Nothing
+         Dim testWb As Object = Nothing
 
-      For Each testWb In workBooks
+         For Each testWb In workBooks
 
-         If testWb.FullName = fileName Then
-            lastWorkbookWasOpen = True
-            wb = testWb
-            Exit For
+            If testWb.FullName = fileName Then
+               lastWorkbookWasOpen = True
+               wb = testWb
+               Exit For
+            End If
+
+         Next testWb
+
+         If wb Is Nothing Then
+
+            lastWorkbookWasOpen = False
+
+            wb = workBooks.Open(fileName)
+
          End If
-
-      Next testWb
-
-      If wb Is Nothing Then
-
-         lastWorkbookWasOpen = False
-
-         wb = workBooks.Open(fileName)
 
       End If
 
-   End If
+      getWorkbook = wb
 
-   getWorkbook = wb
-
-End Function
+   End Function
 
 End Module

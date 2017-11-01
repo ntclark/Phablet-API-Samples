@@ -7,9 +7,9 @@
 #include <Gdiplus.h>
 #endif
 
-#include "resource.h"
-
 #include "pkAPI_i.h"
+
+#include "resource.h"
 
    LRESULT CALLBACK handler(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam);
    LRESULT CALLBACK padBackgroundHandler(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam);

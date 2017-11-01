@@ -38,7 +38,7 @@
 
       nativeWidth = rc.right - rc.left;
 
-      SetDlgItemText(hwnd,IDDI_PAD_KILLER_SERVER,L"192.168.1.139");
+      //SetDlgItemText(hwnd,IDDI_PAD_KILLER_SERVER,L"192.168.1.139");
       //SetDlgItemText(hwnd,IDDI_PAD_KILLER_IMAGE_FILE,L"C:\\Users\\Nate\\Documents\\StandardFormOmega.bmp");
 
       hwndDialog = hwnd;
@@ -66,7 +66,7 @@
             break;
          }
          WCHAR szwTemp[MAX_PATH];
-         swprintf(szwTemp,L"Connecting to: %ls",szwServerName);
+         swprintf_s(szwTemp,MAX_PATH,L"Connecting to: %ls",szwServerName);
          SetDlgItemText(hwnd,IDDI_PAD_KILLER_CONNECT_LABEL,szwTemp);
          HRESULT rc = pISignaturePad -> Connect(szwServerName);
          if ( ! ( S_OK == rc ) ) {
@@ -75,11 +75,11 @@
             break;
          }
 
-         swprintf(szwTemp,L"Connected to: %ls",szwServerName);
+         swprintf_s(szwTemp,MAX_PATH,L"Connected to: %ls",szwServerName);
 
          SetDlgItemText(hwnd,IDDI_PAD_KILLER_CONNECT_LABEL,szwTemp);
 
-         swprintf(szwTemp,L"%ls is connected",szwServerName);
+         swprintf_s(szwTemp,MAX_PATH,L"%ls is connected",szwServerName);
 
          SetDlgItemText(hwnd,IDDI_PAD_KILLER_PAD_LABEL,szwTemp);
 
@@ -110,7 +110,9 @@
 
          GetDlgItemText(hwnd,IDDI_PAD_KILLER_IMAGE_FILE,szwTemp,MAX_PATH);
 
-         FILE *fX = _wfopen(szwTemp,L"rb");
+         FILE *fX = NULL;
+
+         _wfopen_s(&fX,szwTemp,L"rb");
 
          if ( ! fX ) {
             EnableWindow(GetDlgItem(hwnd,IDDI_PAD_KILLER_SEND_IMAGE),FALSE);
@@ -220,7 +222,7 @@
 
          WCHAR szwTemp[MAX_PATH];
 
-         swprintf(szwTemp,L"Background set to %ls",szwImage);
+         swprintf_s(szwTemp,MAX_PATH,L"Background set to %ls",szwImage);
 
          SetDlgItemText(hwnd,IDDI_PAD_KILLER_PAD_LABEL,szwTemp);
 
@@ -255,7 +257,7 @@
       case IDDI_PAD_KILLER_START: {
          pISignaturePad -> Start();
          WCHAR szwTemp[MAX_PATH];
-         swprintf(szwTemp,L"%ls is collecting signature data",szwServerName);
+         swprintf_s(szwTemp,MAX_PATH,L"%ls is collecting signature data",szwServerName);
          SetDlgItemText(hwnd,IDDI_PAD_KILLER_PAD_LABEL,szwTemp);
          }
          break;
@@ -263,7 +265,7 @@
       case IDDI_PAD_KILLER_STOP: {
          pISignaturePad -> Stop();
          WCHAR szwTemp[MAX_PATH];
-         swprintf(szwTemp,L"%ls is not collecting signature data",szwServerName);
+         swprintf_s(szwTemp,MAX_PATH,L"%ls is not collecting signature data",szwServerName);
          SetDlgItemText(hwnd,IDDI_PAD_KILLER_PAD_LABEL,szwTemp);
          }
          break;
@@ -271,7 +273,7 @@
       case IDDI_PAD_KILLER_CLEAR: {
          pISignaturePad -> ClearEverything();
          WCHAR szwTemp[MAX_PATH];
-         swprintf(szwTemp,L"%ls is cleared",szwServerName);
+         swprintf_s(szwTemp,MAX_PATH,L"%ls is cleared",szwServerName);
          SetDlgItemText(hwnd,IDDI_PAD_KILLER_PAD_LABEL,szwTemp);
          }
          break;

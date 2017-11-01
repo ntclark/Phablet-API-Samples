@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "phabletGUI", "vbSample - Phablet GUI\phabletGUI.vbproj", "{4731EE42-42F9-4372-9C48-4AAD423D95CC}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PhabletSimpleSignatureClient", "C++ Simple Signature Client\PadKillerClient.vcxproj", "{63A3D047-1362-4425-A3A9-D9DFA1439896}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PadKillerAPI", "..\Phablet-API\PadKillerAPI\PadKillerAPI.vcxproj", "{5B290941-78FF-44D6-B8F8-98ED355D4318}"
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "vbSample-ezSign", "vbSample - ezSign\vbSample-ezSign.vbproj", "{849E88CA-5706-451B-AB76-95D4B8E885C0}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "phabletGUI", "vbSample - Phablet GUI\phabletGUI.vbproj", "{4731EE42-42F9-4372-9C48-4AAD423D95CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,31 +25,8 @@ Global
 		VisioLogger Release|x86 = VisioLogger Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|x64.Build.0 = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|x86.Build.0 = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|x64.ActiveCfg = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|x64.Build.0 = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|x86.ActiveCfg = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|x86.Build.0 = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|x64.ActiveCfg = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|x64.Build.0 = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|x86.ActiveCfg = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|x86.Build.0 = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|Any CPU.Build.0 = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|x64.ActiveCfg = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|x64.Build.0 = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|x86.ActiveCfg = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|x86.Build.0 = Release|Any CPU
 		{63A3D047-1362-4425-A3A9-D9DFA1439896}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{63A3D047-1362-4425-A3A9-D9DFA1439896}.Debug|Any CPU.Build.0 = Debug|Win32
 		{63A3D047-1362-4425-A3A9-D9DFA1439896}.Debug|x64.ActiveCfg = Debug|Win32
 		{63A3D047-1362-4425-A3A9-D9DFA1439896}.Debug|x86.ActiveCfg = Debug|Win32
 		{63A3D047-1362-4425-A3A9-D9DFA1439896}.Debug|x86.Build.0 = Debug|Win32
@@ -71,26 +46,6 @@ Global
 		{63A3D047-1362-4425-A3A9-D9DFA1439896}.VisioLogger Release|x64.Build.0 = Release|Win32
 		{63A3D047-1362-4425-A3A9-D9DFA1439896}.VisioLogger Release|x86.ActiveCfg = Release|Win32
 		{63A3D047-1362-4425-A3A9-D9DFA1439896}.VisioLogger Release|x86.Build.0 = Release|Win32
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.Debug|x64.ActiveCfg = Debug|x64
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.Debug|x64.Build.0 = Debug|x64
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.Debug|x86.ActiveCfg = Debug|Win32
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.Debug|x86.Build.0 = Debug|Win32
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.Release|Any CPU.ActiveCfg = Release|Win32
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.Release|x64.ActiveCfg = Release|x64
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.Release|x64.Build.0 = Release|x64
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.Release|x86.ActiveCfg = Release|Win32
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.Release|x86.Build.0 = Release|Win32
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.VisioLogger Debug|Any CPU.ActiveCfg = VisioLogger Debug|Win32
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.VisioLogger Debug|x64.ActiveCfg = VisioLogger Debug|x64
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.VisioLogger Debug|x64.Build.0 = VisioLogger Debug|x64
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.VisioLogger Debug|x86.ActiveCfg = VisioLogger Debug|Win32
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.VisioLogger Debug|x86.Build.0 = VisioLogger Debug|Win32
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.VisioLogger Release|Any CPU.ActiveCfg = VisioLogger Release|Win32
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.VisioLogger Release|x64.ActiveCfg = VisioLogger Release|x64
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.VisioLogger Release|x64.Build.0 = VisioLogger Release|x64
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.VisioLogger Release|x86.ActiveCfg = VisioLogger Release|Win32
-		{5B290941-78FF-44D6-B8F8-98ED355D4318}.VisioLogger Release|x86.Build.0 = VisioLogger Release|Win32
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -115,6 +70,30 @@ Global
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Release|x64.Build.0 = Release|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Release|x86.ActiveCfg = Release|x86
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Release|x86.Build.0 = Release|x86
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|x64.Build.0 = Debug|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|x86.Build.0 = Debug|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|x64.ActiveCfg = Release|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|x64.Build.0 = Release|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|x86.ActiveCfg = Release|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|x86.Build.0 = Release|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|x64.ActiveCfg = Debug|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|x64.Build.0 = Debug|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|x86.ActiveCfg = Debug|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|x86.Build.0 = Debug|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|Any CPU.Build.0 = Release|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|x64.ActiveCfg = Release|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|x64.Build.0 = Release|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|x86.ActiveCfg = Release|Any CPU
+		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

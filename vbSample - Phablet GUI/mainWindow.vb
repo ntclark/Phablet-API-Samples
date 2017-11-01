@@ -37,6 +37,8 @@ Public Class mainWindow
    Private Const idSignBackButton = 303
    Private Const idSignInstructions = 304
 
+   Private isAgreed As Boolean = False
+
    Private Const fontSize = 8
    Private Const fontFamily = "Arial"
 
@@ -57,18 +59,22 @@ Public Class mainWindow
 
       Try
 
-         phabletDevice.Connect("")
+         phabletDevice.Connect(deviceIP.Text)
 
       Catch ex As Exception
 
          MsgBox("Is the Phablet Device connected ?" +
-               Chr(10) + Chr(10) + "For Android devices, please make sure the Phablet App is running on it." +
+               Chr(10) + Chr(10) + "Please make sure the PhabletSignaturePad App is running on the Android device." +
                Chr(10) + Chr(10) + "Please also double check the IP Address or network name for the device." +
                Chr(10) + Chr(10) + "The system was expecting to find the device at: " + phabletDevice.IPOrNetworkName)
 
          Exit Sub
 
       End Try
+
+      My.Settings.DeviceIP = deviceIP.Text
+
+      phabletDevice.IPOrNetworkName = deviceIP.Text
 
       phabletDevice.ClearEverything()
 
@@ -368,7 +374,7 @@ Public Class mainWindow
 
          phabletDevice.CreateButton("Back", idSignBackButton, 4, phabletDevice.DeviceHeight - buttonHeight, 1)
 
-         phabletDevice.CreateLabelInches("I have read and understand the agreement on the prior page", idSignInstructions, 0.25, 1.4, 1)
+         phabletDevice.CreateCheckBox("I have read and understood the agreement", idSignInstructions, buttonWidth + 16, phabletDevice.DeviceHeight - 60, 1, 0)
 
          Dim hBitmap As IntPtr = My.Resources.StandardForm.GetHbitmap()
 
@@ -392,7 +398,19 @@ Public Class mainWindow
 
       End If
 
+      If e.optionNumber = idSignInstructions Then
+         isAgreed = True
+      End If
+
       If e.optionNumber = idOkButton Then
+
+         'If Not isAgreed Then
+
+         '   MsgBox("Please affirm your agreement and try again")
+
+         '   Exit Sub
+
+         'End If
 
          tabControl.TabPages.Add("Signature" & (tabControl.TabPages.Count()).ToString())
 
@@ -453,6 +471,10 @@ Public Class mainWindow
          MsgBox("Somebody doesn't like brocolli")
       End If
 
+      If e.optionNumber = idSignInstructions Then
+         isAgreed = False
+      End If
+
    End Sub
 
    Private Sub Start_Click(sender As Object, e As EventArgs) Handles Start.Click
@@ -461,7 +483,17 @@ Public Class mainWindow
 
       loadUserInterface()
 
-      description.Visible = True
+      If phabletDevice.IsConnected Then
+         description.Visible = True
+      Else
+         startInstructions.Visible = True
+      End If
+
+   End Sub
+
+   Private Sub mainWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+      deviceIP.Text = My.Settings.DeviceIP
 
    End Sub
 End Class
