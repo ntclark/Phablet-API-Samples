@@ -39,7 +39,7 @@ Public Class mainWindow
 
    Private isAgreed As Boolean = False
 
-   Private Const fontSize = 8
+   Private Const fontSize = 12
    Private Const fontFamily = "Arial"
 
    Dim formLoaded As Boolean = False
@@ -109,15 +109,15 @@ Public Class mainWindow
 
       introBottom = rect.bottom + 8
 
-      phabletDevice.CreateLabel("DropDown Box:", idColumn1Label, 16, introBottom, 1) ', fontFamily, fontSize)
+      phabletDevice.CreateLabel("DropDown Box:", idColumn1Label, 16, introBottom, 1, fontFamily, fontSize)
 
       rect = phabletDevice.get_ControlBounds(idColumn1Label)
 
-      phabletDevice.CreateLabel("Command Button:", idColumn2Label, rect.right + 20, introBottom, 1) ', fontFamily, fontSize)
+      phabletDevice.CreateLabel("Command Button:", idColumn2Label, rect.right + 20, introBottom, 1, fontFamily, fontSize)
 
       rect = phabletDevice.get_ControlBounds(idColumn2Label)
 
-      phabletDevice.CreateLabel("Radio Button Group:", idColumn3Label, rect.right + 20, introBottom, 1) ', fontFamily, fontSize)
+      phabletDevice.CreateLabel("Radio Button Group:", idColumn3Label, rect.right + 20, introBottom, 1, fontFamily, fontSize)
 
       '
       ' Creating a ComboBox
@@ -150,7 +150,7 @@ Public Class mainWindow
 
       phabletDevice.ShowControl(idDropDownBox)
 
-      phabletDevice.CreateLabelInches("Text at (0.25,1.55) inches", idWelcomeToPhablet6, 0.25, 1.55, 1, fontFamily, fontSize)
+      'phabletDevice.CreateLabelInches("Text at (0.25,1.55) inches", idWelcomeToPhablet6, 0.25, 1.55, 1, fontFamily, fontSize)
 
       '
       ' A Command Button
@@ -181,11 +181,11 @@ Public Class mainWindow
       '
       ' The entry field will be below the Go button
       '
-      phabletDevice.CreateLabel("Entry Field:", idColumn4Label, 16, rectControl.bottom + 16, 1) ', fontFamily, fontSize)
+      phabletDevice.CreateLabel("Entry Field:", idColumn4Label, 16, rectControl.bottom + 16, 1, fontFamily, fontSize)
 
       rectControl = phabletDevice.get_ControlBounds(idColumn4Label)
 
-      phabletDevice.CreateEntryField("", idEntryField, rectControl.right + 16, rectControl.top, 240, 1) ', fontFamily, fontSize)
+      phabletDevice.CreateEntryField("", idEntryField, rectControl.right + 16, rectControl.top, 240, 1, fontFamily, fontSize)
 
       rect = phabletDevice.get_ControlBounds(idColumn1Label)
 
@@ -202,17 +202,17 @@ Public Class mainWindow
       '
       ' Arguments are: Text, id, x, y, isVisible, groupNumber, isChecked
       '
-      phabletDevice.CreateRadioButton("Happy", idRadioButtonGroupA1, 0, 0, 1, 2, 0)
+      phabletDevice.CreateRadioButton("Happy", idRadioButtonGroupA1, 0, 0, 0, 2, 0)
 
       '
       ' Creating another RadioButton in the same group
       '
-      phabletDevice.CreateRadioButton("Sad", idRadioButtonGroupA2, 0, 0, 1, 2, 0)
+      phabletDevice.CreateRadioButton("Sad", idRadioButtonGroupA2, 0, 0, 0, 2, 0)
 
       '
       ' Creating another RadioButton in the same group
       '
-      phabletDevice.CreateRadioButton("None of Your Business", idRadioButtonGroupA3, 0, 0, 1, 2, 1)
+      phabletDevice.CreateRadioButton("None of Your Business", idRadioButtonGroupA3, 0, 0, 0, 2, 1)
 
       '
       ' Position this group of radio buttons under column 3
@@ -228,14 +228,17 @@ Public Class mainWindow
       ptControl.y = rect.top + buttonHeight
 
       phabletDevice.set_ControlPosition(idRadioButtonGroupA1, ptControl)
+      phabletDevice.ShowControl(idRadioButtonGroupA1)
 
       ptControl.y = ptControl.y + buttonHeight
 
       phabletDevice.set_ControlPosition(idRadioButtonGroupA2, ptControl)
+      phabletDevice.ShowControl(idRadioButtonGroupA2)
 
       ptControl.y = ptControl.y + buttonHeight
 
       phabletDevice.set_ControlPosition(idRadioButtonGroupA3, ptControl)
+      phabletDevice.ShowControl(idRadioButtonGroupA3)
 
       '
       ' Another Button to show the next page.
@@ -253,8 +256,8 @@ Public Class mainWindow
       ' Now, create a whole new page of controls, which aren't shown until the user presses next
       ' 
 
-      phabletDevice.CreateTextBox(My.Resources.TextBoxEntry, idTextBox, 0, 0, phabletDevice.DeviceWidth,
-                  phabletDevice.DeviceHeight - (rectButton.bottom - rectButton.top) - 16, 0, fontFamily, 12)
+      phabletDevice.CreateTextBox(My.Resources.TextBoxEntry, idTextBox, 4, 4, phabletDevice.DeviceWidth - 16,
+                  phabletDevice.DeviceHeight - (rectButton.bottom - rectButton.top) - 16 - 8, 0, fontFamily, fontSize)
 
       phabletDevice.CreateButton("Back", idButtonPage1, 16, phabletDevice.DeviceHeight - (rectButton.bottom - rectButton.top) - 8, 0)
 
