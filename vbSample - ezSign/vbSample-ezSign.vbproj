@@ -239,7 +239,10 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)$(ConfigurationName)"
+    <PostBuildEvent>if NOT exist "$(SolutionDir)$(ConfigurationName)"  (
+mkdir "$(SolutionDir)$(ConfigurationName)"
+)
+copy "$(TargetPath)" "$(SolutionDir)$(ConfigurationName)"
 copy "$(TargetDir)AxInterop.*" "$(SolutionDir)$(ConfigurationName)"
 copy "$(TargetDir)Interop.*" "$(SolutionDir)$(ConfigurationName)"
 copy "$(TargetDir)*.Interop.*" "$(SolutionDir)$(ConfigurationName)"

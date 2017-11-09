@@ -74,7 +74,10 @@
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\..\Common\include;$(SolutionDir)\..\Common\resources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <PostBuildEvent>
-      <Command>copy "$(TargetPath)" "$(SolutionDir)$(ConfigurationName)"</Command>
+      <Command>if NOT exist "$(SolutionDir)$(ConfigurationName)"  (
+mkdir "$(SolutionDir)$(ConfigurationName)"
+)
+copy "$(TargetPath)" "$(SolutionDir)$(ConfigurationName)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -101,7 +104,10 @@
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\..\Common\include;$(SolutionDir)\..\Common\resources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <PostBuildEvent>
-      <Command>copy "$(TargetPath)" "$(SolutionDir)$(ConfigurationName)"</Command>
+      <Command>if NOT exist "$(SolutionDir)$(ConfigurationName)"  (
+mkdir "$(SolutionDir)$(ConfigurationName)"
+)
+copy "$(TargetPath)" "$(SolutionDir)$(ConfigurationName)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -58,6 +58,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>phabletGUI.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -178,7 +179,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)$(ConfigurationName)"
+    <PostBuildEvent>if NOT exist "$(SolutionDir)$(ConfigurationName)"  (
+mkdir "$(SolutionDir)$(ConfigurationName)"
+)
+copy "$(TargetPath)" "$(SolutionDir)$(ConfigurationName)\$(TargetFileName)"
 copy "$(TargetDir)AxInterop.*" "$(SolutionDir)$(ConfigurationName)"
 copy "$(TargetDir)Interop.*" "$(SolutionDir)$(ConfigurationName)"
 copy "$(TargetDir)*.Interop.*" "$(SolutionDir)$(ConfigurationName)"

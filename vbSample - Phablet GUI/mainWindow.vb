@@ -39,7 +39,7 @@ Public Class mainWindow
 
    Private isAgreed As Boolean = False
 
-   Private Const fontSize = 12
+   Private Const fontSize = 14
    Private Const fontFamily = "Arial"
 
    Dim formLoaded As Boolean = False
