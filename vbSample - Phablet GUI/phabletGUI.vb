@@ -1,5 +1,4 @@
-﻿
-Public Class mainWindow
+﻿Public Class phabletGUI
 
    Private Const idWelcomeToPhablet1 As Long = 1
    Private Const idWelcomeToPhablet2 As Long = 2
@@ -39,7 +38,7 @@ Public Class mainWindow
 
    Private isAgreed As Boolean = False
 
-   Private Const fontSize = 14
+   Private Const fontSize = 8
    Private Const fontFamily = "Arial"
 
    Dim formLoaded As Boolean = False
@@ -59,7 +58,10 @@ Public Class mainWindow
 
       Try
 
-         phabletDevice.Connect(deviceIP.Text)
+         If (Not phabletDevice.IsConnected) Then
+            phabletDevice.Connect(deviceIP.Text)
+         End If
+
 
       Catch ex As Exception
 
@@ -82,7 +84,7 @@ Public Class mainWindow
       ' Setting the Phablet to not show updates while creating controls prevents the UI from displaying them
       ' as they are getting created, providing a snappier interface construction experience.
       '
-      phabletDevice.ShowUpdates = False
+      phabletDevice.ShowUpdates = True
 
       phabletDevice.FontFamily = fontFamily
 
@@ -90,6 +92,7 @@ Public Class mainWindow
 
       rectEntire = phabletDevice.get_Bounds()
 
+      phabletDevice.CreatePage("Page 1", 1, 1)
       '
       ' Creating a Label. Last parameter is fontSize in 1/72 of an inch (points)
       '
@@ -117,7 +120,7 @@ Public Class mainWindow
 
       rect = phabletDevice.get_ControlBounds(idColumn2Label)
 
-      phabletDevice.CreateLabel("Radio Button Group:", idColumn3Label, rect.right + 20, introBottom, 1, fontFamily, fontSize)
+      phabletDevice.CreateLabel("Radio Button Group:", idColumn3Label, rect.right + 32, introBottom, 1, fontFamily, fontSize)
 
       '
       ' Creating a ComboBox
@@ -181,7 +184,7 @@ Public Class mainWindow
       '
       ' The entry field will be below the Go button
       '
-      phabletDevice.CreateLabel("Entry Field:", idColumn4Label, 16, rectControl.bottom + 16, 1, fontFamily, fontSize)
+      phabletDevice.CreateLabel("Entry Field:", idColumn4Label, 16, rectControl.bottom + 24, 1, fontFamily, fontSize)
 
       rectControl = phabletDevice.get_ControlBounds(idColumn4Label)
 
@@ -223,7 +226,7 @@ Public Class mainWindow
 
       buttonHeight = rectButton.bottom - rectButton.top
 
-      ptControl.x = rect.left + 8
+      ptControl.x = rect.left + 24
 
       ptControl.y = rect.top + buttonHeight
 
@@ -256,6 +259,8 @@ Public Class mainWindow
       ' Now, create a whole new page of controls, which aren't shown until the user presses next
       ' 
 
+      phabletDevice.CreatePage("Page 2", 2, 1)
+
       phabletDevice.CreateTextBox(My.Resources.TextBoxEntry, idTextBox, 4, 4, phabletDevice.DeviceWidth - 16,
                   phabletDevice.DeviceHeight - (rectButton.bottom - rectButton.top) - 16 - 8, 0, fontFamily, fontSize)
 
@@ -263,6 +268,27 @@ Public Class mainWindow
 
       phabletDevice.CreateButton("Sign", idButtonPage3, phabletDevice.DeviceWidth - rectButton.right - rectButton.left - 16,
                                     phabletDevice.DeviceHeight - (rectButton.bottom - rectButton.top) - 8, 0)
+
+      phabletDevice.CreatePage("Page 3", 3, 1)
+
+      '
+      ' These controls are on the "sign here" page.
+      '
+
+      phabletDevice.CreateButton("Clear", idClearButton, 4, 4, 0)
+
+      '
+      ' The event ID ( 2nd parameter) of the button is up to the developer. You can specify any value, when you recieve the
+      ' option selected event, this ID value will be in the event parameter.
+      '
+
+      phabletDevice.CreateButton("Ok", idOkButton, 4, 4, 0)
+
+      phabletDevice.CreateButton("Back", idSignBackButton, 16, phabletDevice.DeviceHeight - (rectButton.bottom - rectButton.top) - 8, 0)
+
+      rectButton = phabletDevice.get_ControlBounds(idSignBackButton)
+
+      phabletDevice.CreateCheckBox("I have read and understood the agreement", idSignInstructions, rectButton.right + 32, phabletDevice.DeviceHeight - (rectButton.bottom - rectButton.top) - 8, 0, 0)
 
       phabletDevice.ShowUpdates = True
 
@@ -285,75 +311,21 @@ Public Class mainWindow
 
       If e.optionNumber = idButtonPage2 Then
 
-         Dim k As Integer
-         Dim controlIds As String
-         controlIds = ""
-         For k = minPage1Ids To maxPage1Ids
-            controlIds = controlIds & k & ","
-         Next k
-
-         phabletDevice.ShowUpdates = False
-
-         phabletDevice.HideControlList(controlIds)
-
-         phabletDevice.HideControl(idButtonPage2)
-
-         phabletDevice.ShowControl(idTextBox)
-
-         phabletDevice.ShowControl(idButtonPage1)
-
-         phabletDevice.ShowControl(idButtonPage3)
-
-         phabletDevice.ShowUpdates = True
+         phabletDevice.ShowPage(2, 1)
 
       End If
 
       If e.optionNumber = idButtonPage1 Then
 
-         phabletDevice.ShowUpdates = False
-
-         phabletDevice.HideControl(idTextBox)
-
-         phabletDevice.HideControl(idButtonPage1)
-
-         phabletDevice.HideControl(idButtonPage3)
-
-         Dim k As Integer
-         Dim controlIds As String
-         controlIds = ""
-         For k = minPage1Ids To maxPage1Ids
-            controlIds = controlIds & k & ","
-         Next k
-
-         phabletDevice.ShowControlList(controlIds)
-
-         phabletDevice.ShowControl(idButtonPage2)
-
-         phabletDevice.ShowUpdates = True
+         phabletDevice.ShowPage(1, 1)
 
       End If
 
       If e.optionNumber = idButtonPage3 Then
 
-         phabletDevice.ShowUpdates = False
+         phabletDevice.ShowPage(2, 0)
 
-         phabletDevice.HideControl(idTextBox)
-
-         phabletDevice.HideControl(idButtonPage1)
-
-         phabletDevice.HideControl(idButtonPage3)
-
-         phabletDevice.ShowUpdates = True
-
-         phabletDevice.ShowUpdates = False
-
-         phabletDevice.CreateButton("Clear", idClearButton, 4, 4, 1)
-
-         '
-         ' The event ID ( 2nd parameter) of the button is up to the developer. You can specify any value, when you recieve the
-         ' option selected event, this ID value will be in the event parameter.
-         '
-         phabletDevice.CreateButton("Ok", idOkButton, 4, 4, 1)
+         phabletDevice.ShowPage(3, 1)
 
          '
          ' Obtain the size of the Ok button in order to place it against the right edge of the display ( minus 12 pixels )
@@ -375,9 +347,8 @@ Public Class mainWindow
 
          phabletDevice.set_ControlPosition(idOkButton, point)
 
-         phabletDevice.CreateButton("Back", idSignBackButton, 4, phabletDevice.DeviceHeight - buttonHeight, 1)
-
-         phabletDevice.CreateCheckBox("I have read and understood the agreement", idSignInstructions, buttonWidth + 16, phabletDevice.DeviceHeight - 60, 1, 0)
+         'phabletDevice.ShowControl(idSignBackButton)
+         'phabletDevice.ShowControl(idSignInstructions)
 
          Dim hBitmap As IntPtr = My.Resources.StandardForm.GetHbitmap()
 
@@ -407,13 +378,13 @@ Public Class mainWindow
 
       If e.optionNumber = idOkButton Then
 
-         'If Not isAgreed Then
+         If Not isAgreed Then
 
-         '   MsgBox("Please affirm your agreement and try again")
+            phabletDevice.ShowMessage("Please affirm your agreement and try again")
 
-         '   Exit Sub
+            Exit Sub
 
-         'End If
+         End If
 
          tabControl.TabPages.Add("Signature" & (tabControl.TabPages.Count()).ToString())
 
@@ -437,7 +408,11 @@ Public Class mainWindow
 
          My.Computer.FileSystem.DeleteFile(phabletDevice.NativeSizeImageFile)
 
-         loadUserInterface()
+         phabletDevice.ClearInk()
+
+         phabletDevice.ClearBackground()
+
+         phabletDevice.ShowPage(1, 1)
 
       End If
 
@@ -447,23 +422,8 @@ Public Class mainWindow
 
          phabletDevice.ClearBackground()
 
-         phabletDevice.ShowUpdates = False
+         phabletDevice.ShowPage(2, 1)
 
-         phabletDevice.HideControl(idOkButton)
-
-         phabletDevice.HideControl(idClearButton)
-
-         phabletDevice.HideControl(idSignBackButton)
-
-         phabletDevice.HideControl(idSignInstructions)
-
-         phabletDevice.ShowControl(idTextBox)
-
-         phabletDevice.ShowControl(idButtonPage1)
-
-         phabletDevice.ShowControl(idButtonPage3)
-
-         phabletDevice.ShowUpdates = True
       End If
 
    End Sub
@@ -480,23 +440,46 @@ Public Class mainWindow
 
    End Sub
 
-   Private Sub Start_Click(sender As Object, e As EventArgs) Handles Start.Click
 
-      startInstructions.Visible = False
-
-      loadUserInterface()
-
-      If phabletDevice.IsConnected Then
-         description.Visible = True
-      Else
-         startInstructions.Visible = True
-      End If
-
-   End Sub
-
-   Private Sub mainWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+   Private Sub phabletGUI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
       deviceIP.Text = My.Settings.DeviceIP
 
    End Sub
+
+   Private Sub connect_Click(sender As Object, e As EventArgs) Handles connect.Click
+
+      description.Text = My.Resources.isLoading
+
+      'Update()
+
+      Try
+
+         phabletDevice.Connect(deviceIP.Text)
+
+         If (phabletDevice.IsConnected) Then
+            loadUserInterface()
+            description.Text = My.Resources.isLoaded
+         End If
+
+         Exit Try
+
+      Catch ex As Exception
+
+         MsgBox("Is the Phablet Device connected ?" +
+               Chr(10) + Chr(10) + "Please make sure the PhabletSignaturePad App is running on the Android device." +
+               Chr(10) + Chr(10) + "Please also double check the IP Address or network name for the device." +
+               Chr(10) + Chr(10) + "Is a firewall blocking ports 17639 thru 17642 ?" +
+               Chr(10) + Chr(10) + "The system was expecting to find the device at: " + deviceIP.Text)
+
+      End Try
+
+   End Sub
+
+   Private Sub phabletDevice_ShuttingDown(sender As Object, e As EventArgs) Handles phabletDevice.ShuttingDown
+
+      Application.Exit()
+
+   End Sub
+
 End Class

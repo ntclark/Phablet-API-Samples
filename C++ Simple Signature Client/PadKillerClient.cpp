@@ -11,10 +11,7 @@
 
    hModule = hInst;
 
-   if ( WSAStartup(MAKEWORD(2,2),&wsaData) ) {
-      MessageBox(NULL,L"There was an error starting, WSAStartup failed",L"Note",MB_OK | MB_ICONEXCLAMATION);
-      return 0;
-   }
+   WSAStartup(MAKEWORD(2,2),&wsaData);
 
    OleInitialize(NULL);
 

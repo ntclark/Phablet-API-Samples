@@ -8,7 +8,17 @@ Public Class ezSign
 
    Private Sub phabletSample_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+      If "" = My.Settings.DeviceIP Then
+         Exit Sub
+      End If
+
+      Dim pushDownControls As Long
+      Dim pushRightControls As Long
+
       phabletDevice.IPOrNetworkName = My.Settings.DeviceIP
+
+      pushDownControls = phabletDevice.DisplayRectangle.Bottom
+      pushRightControls = phabletDevice.DisplayRectangle.Right
 
       deviceName.Text = My.Settings.DeviceIP
 
@@ -20,7 +30,7 @@ Public Class ezSign
 
       Try
 
-         phabletDevice.Connect("")
+         phabletDevice.Connect(My.Settings.DeviceIP)
 
       Catch ex As Exception
 
@@ -32,7 +42,6 @@ Public Class ezSign
          startCapture.Enabled = False
          stopCapture.Enabled = False
          clearHandwriting.Enabled = False
-         getImage.Enabled = False
          getNativeImage.Enabled = False
          getBitmap.Enabled = False
          clearEverything.Enabled = False
@@ -46,12 +55,35 @@ Public Class ezSign
       startCapture.Enabled = True
       stopCapture.Enabled = True
       clearHandwriting.Enabled = True
-      getImage.Enabled = True
       getNativeImage.Enabled = True
       getBitmap.Enabled = True
       clearEverything.Enabled = True
       embedImage.Enabled = True
       embedSettings.Enabled = True
+
+      '
+      ' Because the target Android device can vary in width and height, 
+      ' the phabletDevice control size is changed to be the same.
+      ' This involves pushing all other controls down, and sizing the
+      ' main window appropriately.
+      '
+      pushDownControls = phabletDevice.Height - pushDownControls
+
+      pushRightControls = phabletDevice.Width - pushRightControls
+
+      Height = Height + pushDownControls
+
+      Width = Width + pushRightControls
+
+      For Each control In Controls
+
+         If Not control Is phabletDevice Then
+
+            control.top = control.top + pushDownControls
+
+         End If
+
+      Next
 
       phabletDevice.FontSize = 12.0
 
@@ -92,6 +124,11 @@ Public Class ezSign
       point.y = rect.top
 
       phabletDevice.set_ControlPosition(idOkButton, point)
+
+      phabletDevice.ShowControl(idClearButton)
+
+      phabletDevice.ShowControl(idOkButton)
+
 
    End Sub
 
@@ -195,7 +232,7 @@ Public Class ezSign
    End Sub
 
 
-   Private Sub getImage_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles getImage.Click
+   Private Sub getImage_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
       showDisplay(Image.FromHbitmap(phabletDevice.Image))
    End Sub
 
@@ -213,7 +250,7 @@ Public Class ezSign
    Private Sub getBitmap_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles getBitmap.Click
 
       getBackgroundFile.Title = "Open an image file..."
-      getBackgroundFile.Filter = "Bitmap (*.bmp) |*.bmp|JPeg image (*.jpeg)|*.jpeg|PNG image|*.png"
+      getBackgroundFile.Filter = "Bitmap (*.bmp) |*.bmp|JPeg image (*.jpeg;*.jpg)|*.jpeg,*.jpg|PNG image|*.png|Images (*.bmp,*.jpg,*.jpeg,*.png)|*.bmp;*.jpg;*.jpeg;*.png"
       getBackgroundFile.DefaultExt = "jpeg"
 
       If DialogResult.Cancel = getBackgroundFile.ShowDialog Then

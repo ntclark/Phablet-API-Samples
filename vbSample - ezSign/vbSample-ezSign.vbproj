@@ -12,7 +12,7 @@
     <AssemblyName>ezSign</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
     <OptionStrict>Off</OptionStrict>
@@ -24,6 +24,12 @@
     <TargetZone>LocalIntranet</TargetZone>
     <SignManifests>false</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -38,11 +44,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>3.5</OldToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,8 +53,9 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>ezSign.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -63,6 +65,8 @@
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>ezSign.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -74,6 +78,7 @@
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DefineTrace>true</DefineTrace>
@@ -83,6 +88,7 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
@@ -198,6 +204,11 @@
       <ProductName>.NET Framework 3.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
       <Visible>False</Visible>
       <ProductName>Windows Installer 3.1</ProductName>
@@ -221,14 +232,6 @@
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
-    <COMReference Include="PhabletSignaturePad">
-      <Guid>{2FAAB00E-3D9F-4B4D-B5FE-B71B6B7BDD00}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -239,13 +242,36 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>if NOT exist "$(SolutionDir)$(ConfigurationName)"  (
-mkdir "$(SolutionDir)$(ConfigurationName)"
+    <PostBuildEvent>
+if '$(PlatformName)' == 'Any CPU' or '$(PlatformName)' == 'x64' (
+   copy "$(TargetPath)" "%25GSYSTEM_HOME%25\Common\Artifacts\$(ConfigurationName)\x64"
+   copy "$(TargetDir)AxInterop.*" "%25GSYSTEM_HOME%25\Common\Artifacts\$(ConfigurationName)\x64"
+   copy "$(TargetDir)Interop.*" "%25GSYSTEM_HOME%25\Common\Artifacts\$(ConfigurationName)\x64"
+   copy "$(TargetDir)*.Interop.*" "%25GSYSTEM_HOME%25\Common\Artifacts\$(ConfigurationName)\x64"
+   copy "$(TargetDir)*.exe.config" "%25GSYSTEM_HOME%25\Common\Artifacts\$(ConfigurationName)\x64"
+
+   copy "$(TargetPath)" "$(SolutionDir)\$(ConfigurationName)\x64"
+   copy "$(TargetDir)AxInterop.*" "$(SolutionDir)\$(ConfigurationName)\x64"
+   copy "$(TargetDir)Interop.*" "$(SolutionDir)\$(ConfigurationName)\x64"
+   copy "$(TargetDir)*.Interop.*" "$(SolutionDir)\$(ConfigurationName)\x64"
+   copy "$(TargetDir)*.exe.config" "$(SolutionDir)\$(ConfigurationName)\x64"
+
 )
-copy "$(TargetPath)" "$(SolutionDir)$(ConfigurationName)"
-copy "$(TargetDir)AxInterop.*" "$(SolutionDir)$(ConfigurationName)"
-copy "$(TargetDir)Interop.*" "$(SolutionDir)$(ConfigurationName)"
-copy "$(TargetDir)*.Interop.*" "$(SolutionDir)$(ConfigurationName)"
-copy "$(TargetDir)*.exe.config" "$(SolutionDir)$(ConfigurationName)"</PostBuildEvent>
+
+if '$(PlatformName)' == 'x86' (
+   copy "$(TargetPath)" "%25GSYSTEM_HOME%25\Common\Artifacts\$(ConfigurationName)\win32"
+   copy "$(TargetDir)AxInterop.*" "%25GSYSTEM_HOME%25\Common\Artifacts\$(ConfigurationName)\win32"
+   copy "$(TargetDir)Interop.*" "%25GSYSTEM_HOME%25\Common\Artifacts\$(ConfigurationName)\win32"
+   copy "$(TargetDir)*.Interop.*" "%25GSYSTEM_HOME%25\Common\Artifacts\$(ConfigurationName)\win32"
+   copy "$(TargetDir)*.exe.config" "%25GSYSTEM_HOME%25\Common\Artifacts\$(ConfigurationName)\win32"
+
+   copy "$(TargetPath)" "$(SolutionDir)\$(ConfigurationName)\win32"
+   copy "$(TargetDir)AxInterop.*" "$(SolutionDir)\$(ConfigurationName)\win32"
+   copy "$(TargetDir)Interop.*" "$(SolutionDir)\$(ConfigurationName)\win32"
+   copy "$(TargetDir)*.Interop.*" "$(SolutionDir)\$(ConfigurationName)\win32"
+   copy "$(TargetDir)*.exe.config" "$(SolutionDir)\$(ConfigurationName)\win32"
+
+)
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

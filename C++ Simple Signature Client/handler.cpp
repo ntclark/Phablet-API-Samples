@@ -38,12 +38,9 @@
 
       nativeWidth = rc.right - rc.left;
 
-      //SetDlgItemText(hwnd,IDDI_PAD_KILLER_SERVER,L"192.168.1.139");
-      //SetDlgItemText(hwnd,IDDI_PAD_KILLER_IMAGE_FILE,L"C:\\Users\\Nate\\Documents\\StandardFormOmega.bmp");
-
       hwndDialog = hwnd;
 
-      nativeControlHandler = (WNDPROC)SetWindowLong(GetDlgItem(hwndDialog,IDDI_PAD_KILLER_PAD),GWL_WNDPROC,(long)padBackgroundHandler);
+      nativeControlHandler = (WNDPROC)SetWindowLongPtr(GetDlgItem(hwndDialog,IDDI_PAD_KILLER_PAD),GWLP_WNDPROC,(ULONG_PTR)padBackgroundHandler);
 
       }
       return (LRESULT)0L;
@@ -225,31 +222,6 @@
          swprintf_s(szwTemp,MAX_PATH,L"Background set to %ls",szwImage);
 
          SetDlgItemText(hwnd,IDDI_PAD_KILLER_PAD_LABEL,szwTemp);
-
-
-#if 0
-         if ( ! ( S_OK == sendImage(szImage) ) ) {
-            MessageBox(hwndDialog,L"There was an error sending the image, is the Pad Connected?",L"Error",MB_OK | MB_ICONEXCLAMATION);
-            break;
-         }
-
-         char szCommand[128];
-
-         sprintf(szCommand,"%ld",CLEARHOTSPOTS);
-         sendCommand(szCommand);
-
-         sprintf(szCommand,"%ld %ld %ld %ld %ld %ld",HOTSPOT,565,0,640,40,1);
-         sendCommand(szCommand);
-
-         sprintf(szCommand,"%ld %ld %ld %ld %ld %ld",HOTSPOT,0,0,136,41,0);
-         sendCommand(szCommand);
-
-         sprintf(szCommand,"%ld 4 4 130 41 0 Clear",CREATEBUTTON);
-         sendCommand(szCommand);
-
-         sprintf(szCommand,"%ld 561 4 630 40 1 Ok",CREATEBUTTON);
-         sendCommand(szCommand);
-#endif
 
          }
          break;
