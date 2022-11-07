@@ -35,8 +35,7 @@ Public Class ezSign
       Catch ex As Exception
 
          MsgBox("Is the Phablet Device connected ?" +
-               Chr(10) + Chr(10) + "Please make sure the PhabletSignaturePad App is running on your Android device." +
-               Chr(10) + Chr(10) + "Please also double check the IP Address or network name for the device." +
+               Chr(10) + Chr(10) + phabletDevice.connectionProblemTroubleshooter +
                Chr(10) + Chr(10) + "The system was expecting to find the device at: " + phabletDevice.IPOrNetworkName)
 
          startCapture.Enabled = False

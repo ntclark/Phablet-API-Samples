@@ -2,10 +2,6 @@
 
    Private Const idWelcomeToPhablet1 As Long = 1
    Private Const idWelcomeToPhablet2 As Long = 2
-   Private Const idWelcomeToPhablet3 As Long = 3
-   Private Const idWelcomeToPhablet4 As Long = 4
-   Private Const idWelcomeToPhablet5 As Long = 5
-   Private Const idWelcomeToPhablet6 As Long = 6
 
    Private Const idGoButton As Long = 7
    Private Const idDropDownBox As Long = 8
@@ -22,9 +18,6 @@
    Private Const idRadioButtonGroupA2 As Long = 16
    Private Const idRadioButtonGroupA3 As Long = 17
 
-   Private Const minPage1Ids = 1
-   Private Const maxPage1Ids = 17
-
    Private Const idButtonPage2 = 102
    Private Const idButtonPage3 = 103
 
@@ -36,14 +29,40 @@
    Private Const idSignBackButton = 303
    Private Const idSignInstructions = 304
 
-   Private isAgreed As Boolean = False
-
    Private Const fontSize = 8
    Private Const fontFamily = "Arial"
 
-   Dim formLoaded As Boolean = False
+   Dim connectedDevice As String
 
-   Private Sub loadUserInterface()
+   Dim borderTop, borderRight, borderBottom As Int16
+
+   Private Sub doConnect()
+
+      Try
+
+         If (Not phabletDevice.IsConnected Or Not connectedDevice = deviceIP.Text) Then
+            phabletDevice.Connect(deviceIP.Text)
+            connectedDevice = deviceIP.Text
+         End If
+
+
+      Catch ex As Exception
+
+         MsgBox("Is the Phablet Device connected ?" +
+               Chr(10) + Chr(10) + phabletDevice.ConnectionProblemTroubleshooter +
+               Chr(10) + Chr(10) + "The system was expecting to find the device at: " + deviceIP.Text)
+
+         Exit Sub
+
+      End Try
+
+      My.Settings.DeviceIP = deviceIP.Text
+
+      Call phabletDevice_ConfigurationChanged(Nothing, Nothing)
+
+   End Sub
+
+   Private Sub renderInterface()
 
       Dim rect As PhabletSignaturePad.tagRECT
       Dim rectControl As PhabletSignaturePad.tagRECT
@@ -56,30 +75,6 @@
       Dim introBottom As Integer
       Dim buttonHeight As Integer
 
-      Try
-
-         If (Not phabletDevice.IsConnected) Then
-            phabletDevice.Connect(deviceIP.Text)
-         End If
-
-
-      Catch ex As Exception
-
-         MsgBox("Is the Phablet Device connected ?" +
-               Chr(10) + Chr(10) + "Please make sure the PhabletSignaturePad App is running on the Android device." +
-               Chr(10) + Chr(10) + "Please also double check the IP Address or network name for the device." +
-               Chr(10) + Chr(10) + "The system was expecting to find the device at: " + phabletDevice.IPOrNetworkName)
-
-         Exit Sub
-
-      End Try
-
-      My.Settings.DeviceIP = deviceIP.Text
-
-      phabletDevice.IPOrNetworkName = deviceIP.Text
-
-      phabletDevice.ClearEverything()
-
       '
       ' Setting the Phablet to not show updates while creating controls prevents the UI from displaying them
       ' as they are getting created, providing a snappier interface construction experience.
@@ -91,6 +86,10 @@
       phabletDevice.FontSize = fontSize
 
       rectEntire = phabletDevice.get_Bounds()
+
+      phabletDevice.IPOrNetworkName = deviceIP.Text
+
+      phabletDevice.ClearEverything()
 
       phabletDevice.CreatePage("Page 1", 1, 1)
       '
@@ -294,30 +293,81 @@
 
    End Sub
 
+   Private Sub phabletGUI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-   Private Sub phabletDevice_OptionSelected(ByVal sender As System.Object, ByVal e As AxPhabletSignaturePad.IPhabletSignaturePadEvents_OptionSelectedEvent) Handles phabletDevice.OptionSelected
+      deviceIP.Text = My.Settings.DeviceIP
+
+   End Sub
+
+   Private Sub connect_Click(sender As Object, e As EventArgs) Handles connect.Click
+
+      description.Text = My.Resources.isLoading
+
+      doConnect()
+
+   End Sub
+
+   Private Sub phabletDevice_ShuttingDown(sender As Object, e As EventArgs) Handles phabletDevice.ShuttingDown
+
+      Application.Exit()
+
+   End Sub
+
+   Private Sub phabletDevice_ConfigurationChanged(sender As Object, e As EventArgs) Handles phabletDevice.ConfigurationChanged
+
+      Dim deltaX As Int16, deltaY As Int16
+
+      Width = phabletDevice.CtlWidth + tabControl.Left + 48
+      Height = tabControl.Top + phabletDevice.CtlHeight + 22 + description.Height + 64
+
+      deltaX = phabletDevice.CtlWidth - interfaceTab.Width
+      deltaY = phabletDevice.CtlHeight - interfaceTab.Height + 22
+
+      tabControl.Width = phabletDevice.CtlWidth
+      tabControl.Height = phabletDevice.CtlHeight + 22
+
+      description.Top = tabControl.Bottom + 8
+
+      phabletDevice.Width = phabletDevice.CtlWidth
+      phabletDevice.Height = phabletDevice.CtlHeight + 22
+
+
+      Call renderInterface()
+
+   End Sub
+
+   Private Sub phabletDevice_OptionSelected(sender As Object, e As AxPhabletSignaturePad.IPhabletSignaturePadEvents_OptionSelectedEvent) Handles phabletDevice.OptionSelected
 
       If e.optionNumber = idGoButton Then
          MsgBox("Someone taped Go on the Phablet")
+         Exit Sub
       End If
 
       If e.optionNumber = idCheckBox Then
          MsgBox("Somebody likes brocolli")
+         Exit Sub
       End If
 
       If idRadioButtonGroupA1 <= e.optionNumber And e.optionNumber <= idRadioButtonGroupA3 Then
          MsgBox("Somebody Is feeling " + phabletDevice.get_ControlText(e.optionNumber) + " today")
+         Exit Sub
       End If
 
       If e.optionNumber = idButtonPage2 Then
 
          phabletDevice.ShowPage(2, 1)
 
+         Exit Sub
+
       End If
 
       If e.optionNumber = idButtonPage1 Then
 
          phabletDevice.ShowPage(1, 1)
+
+         phabletDevice.Stop()
+
+         Exit Sub
 
       End If
 
@@ -364,21 +414,25 @@
 
          phabletDevice.ShowUpdates = True
 
+         Exit Sub
+
       End If
 
       If e.optionNumber = idClearButton Then
 
          phabletDevice.ClearInk()
 
+         Exit Sub
+
       End If
 
       If e.optionNumber = idSignInstructions Then
-         isAgreed = True
+         Exit Sub
       End If
 
       If e.optionNumber = idOkButton Then
 
-         If Not isAgreed Then
+         If Not phabletDevice.get_ControlIsChecked(idSignInstructions) Then
 
             phabletDevice.ShowMessage("Please affirm your agreement and try again")
 
@@ -412,7 +466,11 @@
 
          phabletDevice.ClearBackground()
 
+         phabletDevice.Stop()
+
          phabletDevice.ShowPage(1, 1)
+
+         Exit Sub
 
       End If
 
@@ -422,64 +480,26 @@
 
          phabletDevice.ClearBackground()
 
+         phabletDevice.Stop()
+
          phabletDevice.ShowPage(2, 1)
+
+         Exit Sub
 
       End If
 
    End Sub
 
-   Private Sub phabletDevice_OptionUnSelected(ByVal sender As System.Object, ByVal e As AxPhabletSignaturePad.IPhabletSignaturePadEvents_OptionUnSelectedEvent) Handles phabletDevice.OptionUnSelected
+   Private Sub phabletDevice_OptionUnSelected(sender As Object, e As AxPhabletSignaturePad.IPhabletSignaturePadEvents_OptionUnSelectedEvent) Handles phabletDevice.OptionUnSelected
 
       If e.optionNumber = idCheckBox Then
          MsgBox("Somebody doesn't like brocolli")
       End If
 
       If e.optionNumber = idSignInstructions Then
-         isAgreed = False
       End If
 
    End Sub
 
-
-   Private Sub phabletGUI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-      deviceIP.Text = My.Settings.DeviceIP
-
-   End Sub
-
-   Private Sub connect_Click(sender As Object, e As EventArgs) Handles connect.Click
-
-      description.Text = My.Resources.isLoading
-
-      'Update()
-
-      Try
-
-         phabletDevice.Connect(deviceIP.Text)
-
-         If (phabletDevice.IsConnected) Then
-            loadUserInterface()
-            description.Text = My.Resources.isLoaded
-         End If
-
-         Exit Try
-
-      Catch ex As Exception
-
-         MsgBox("Is the Phablet Device connected ?" +
-               Chr(10) + Chr(10) + "Please make sure the PhabletSignaturePad App is running on the Android device." +
-               Chr(10) + Chr(10) + "Please also double check the IP Address or network name for the device." +
-               Chr(10) + Chr(10) + "Is a firewall blocking ports 17639 thru 17642 ?" +
-               Chr(10) + Chr(10) + "The system was expecting to find the device at: " + deviceIP.Text)
-
-      End Try
-
-   End Sub
-
-   Private Sub phabletDevice_ShuttingDown(sender As Object, e As EventArgs) Handles phabletDevice.ShuttingDown
-
-      Application.Exit()
-
-   End Sub
 
 End Class

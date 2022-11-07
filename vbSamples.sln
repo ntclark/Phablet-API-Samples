@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29403.142
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PhabletSimpleSignatureClient", "C++ Simple Signature Client\PadKillerClient.vcxproj", "{63A3D047-1362-4425-A3A9-D9DFA1439896}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "vbSample-ezSign", "vbSample - ezSign\vbSample-ezSign.vbproj", "{849E88CA-5706-451B-AB76-95D4B8E885C0}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PhabletGUI", "PhabletGUI\PhabletGUI.vbproj", "{37960186-E331-4EB1-81DD-0C4FC6994EB4}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "phabletGUI", "vbSample - Phablet GUI\phabletGUI.vbproj", "{4731EE42-42F9-4372-9C48-4AAD423D95CC}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "vbSample-ezSign", "vbSample - ezSign\vbSample-ezSign.vbproj", "{849E88CA-5706-451B-AB76-95D4B8E885C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,52 +49,54 @@ Global
 		{63A3D047-1362-4425-A3A9-D9DFA1439896}.VisioLogger Release|x64.Build.0 = Release|Win32
 		{63A3D047-1362-4425-A3A9-D9DFA1439896}.VisioLogger Release|x86.ActiveCfg = Release|Win32
 		{63A3D047-1362-4425-A3A9-D9DFA1439896}.VisioLogger Release|x86.Build.0 = Release|Win32
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.Debug|x64.Build.0 = Debug|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.Debug|x86.ActiveCfg = Debug|x86
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.Debug|x86.Build.0 = Debug|x86
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.Release|x64.ActiveCfg = Release|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.Release|x64.Build.0 = Release|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.Release|x86.ActiveCfg = Release|x86
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.Release|x86.Build.0 = Release|x86
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.VisioLogger Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.VisioLogger Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.VisioLogger Debug|x64.ActiveCfg = Debug|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.VisioLogger Debug|x64.Build.0 = Debug|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.VisioLogger Debug|x86.ActiveCfg = Debug|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.VisioLogger Debug|x86.Build.0 = Debug|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.VisioLogger Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.VisioLogger Release|Any CPU.Build.0 = Release|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.VisioLogger Release|x64.ActiveCfg = Release|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.VisioLogger Release|x64.Build.0 = Release|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.VisioLogger Release|x86.ActiveCfg = Release|Any CPU
+		{37960186-E331-4EB1-81DD-0C4FC6994EB4}.VisioLogger Release|x86.Build.0 = Release|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Debug|x64.Build.0 = Debug|Any CPU
-		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Debug|x86.ActiveCfg = Debug|x86
+		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Debug|x86.Build.0 = Debug|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Release|x64.ActiveCfg = Release|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Release|x64.Build.0 = Release|Any CPU
-		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Release|x86.ActiveCfg = Release|x86
+		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Release|x86.ActiveCfg = Release|Any CPU
+		{849E88CA-5706-451B-AB76-95D4B8E885C0}.Release|x86.Build.0 = Release|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Debug|Any CPU.Build.0 = Debug|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Debug|x64.ActiveCfg = Debug|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Debug|x64.Build.0 = Debug|Any CPU
-		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Debug|x86.ActiveCfg = Debug|x86
-		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Debug|x86.Build.0 = Debug|x86
+		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Debug|x86.ActiveCfg = Debug|Any CPU
+		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Debug|x86.Build.0 = Debug|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Release|Any CPU.ActiveCfg = Release|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Release|Any CPU.Build.0 = Release|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Release|x64.ActiveCfg = Release|Any CPU
 		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Release|x64.Build.0 = Release|Any CPU
-		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Release|x86.ActiveCfg = Release|x86
-		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Release|x86.Build.0 = Release|x86
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|x64.Build.0 = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|x86.ActiveCfg = Debug|x86
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Debug|x86.Build.0 = Debug|x86
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|x64.ActiveCfg = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|x64.Build.0 = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|x86.ActiveCfg = Release|x86
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.Release|x86.Build.0 = Release|x86
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|x64.ActiveCfg = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|x64.Build.0 = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|x86.ActiveCfg = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Debug|x86.Build.0 = Debug|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|Any CPU.Build.0 = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|x64.ActiveCfg = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|x64.Build.0 = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|x86.ActiveCfg = Release|Any CPU
-		{4731EE42-42F9-4372-9C48-4AAD423D95CC}.VisioLogger Release|x86.Build.0 = Release|Any CPU
+		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Release|x86.ActiveCfg = Release|Any CPU
+		{849E88CA-5706-451B-AB76-95D4B8E885C0}.VisioLogger Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -28,24 +28,24 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -53,19 +53,19 @@
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\Common\Compiler Options.props" />
+    <Import Project="$(GSYSTEM_HOME)\Common\Compiler Options.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\Common\Compiler Options.props" />
+    <Import Project="$(GSYSTEM_HOME)\Common\Compiler Options.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\Common\Compiler Options.props" />
+    <Import Project="$(GSYSTEM_HOME)\Common\Compiler Options.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\Common\Compiler Options.props" />
+    <Import Project="$(GSYSTEM_HOME)\Common\Compiler Options.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
@@ -74,16 +74,20 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(GSYSTEM_HOME)\Common\Phablet-API-Samples\$(Configuration)\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(GSYSTEM_HOME)\Common\Phablet-API-Samples\$(Configuration)\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(GSYSTEM_HOME)\Common\Phablet-API-Samples\$(Configuration)\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(GSYSTEM_HOME)\Common\Phablet-API-Samples\$(Configuration)\$(Platform)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -106,11 +110,15 @@
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\..\Common\include;$(SolutionDir)\..\Common\resources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <PostBuildEvent>
-      <Command>if '$(PlatformName)' == 'Any CPU' or '$(PlatformName)' == 'x64' (
+      <Command>
+Exit 0
+
+
+if '$(PlatformName)' == 'x64' (
    copy "$(TargetPath)" "$(SolutionDir)\$(ConfigurationName)\x64"
 )
 
-if '$(PlatformName)' == 'x86' (
+if '$(PlatformName)' == 'Win32' (
    copy "$(TargetPath)" "$(SolutionDir)\$(ConfigurationName)\win32"
 )</Command>
     </PostBuildEvent>
@@ -135,11 +143,15 @@ if '$(PlatformName)' == 'x86' (
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\..\Common\include;$(SolutionDir)\..\Common\resources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <PostBuildEvent>
-      <Command>if '$(PlatformName)' == 'Any CPU' or '$(PlatformName)' == 'x64' (
+      <Command>
+Exit 0
+
+
+if '$(PlatformName)' == 'x64' (
    copy "$(TargetPath)" "$(SolutionDir)\$(ConfigurationName)\x64"
 )
 
-if '$(PlatformName)' == 'x86' (
+if '$(PlatformName)' == 'Win32' (
    copy "$(TargetPath)" "$(SolutionDir)\$(ConfigurationName)\win32"
 )</Command>
     </PostBuildEvent>
@@ -167,11 +179,15 @@ if '$(PlatformName)' == 'x86' (
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\..\Common\include;$(SolutionDir)\..\Common\resources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <PostBuildEvent>
-      <Command>if '$(PlatformName)' == 'Any CPU' or '$(PlatformName)' == 'x64' (
+      <Command>
+Exit 0
+
+
+if '$(PlatformName)' == 'x64' (
    copy "$(TargetPath)" "$(SolutionDir)\$(ConfigurationName)\x64"
 )
 
-if '$(PlatformName)' == 'x86' (
+if '$(PlatformName)' == 'Win32' (
    copy "$(TargetPath)" "$(SolutionDir)\$(ConfigurationName)\win32"
 )</Command>
     </PostBuildEvent>
@@ -199,11 +215,15 @@ if '$(PlatformName)' == 'x86' (
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\..\Common\include;$(SolutionDir)\..\Common\resources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <PostBuildEvent>
-      <Command>if '$(PlatformName)' == 'Any CPU' or '$(PlatformName)' == 'x64' (
+      <Command>
+Exit 0
+
+
+if '$(PlatformName)' == 'x64' (
    copy "$(TargetPath)" "$(SolutionDir)\$(ConfigurationName)\x64"
 )
 
-if '$(PlatformName)' == 'x86' (
+if '$(PlatformName)' == 'Win32' (
    copy "$(TargetPath)" "$(SolutionDir)\$(ConfigurationName)\win32"
 )</Command>
     </PostBuildEvent>

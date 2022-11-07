@@ -67,7 +67,12 @@
          SetDlgItemText(hwnd,IDDI_PAD_KILLER_CONNECT_LABEL,szwTemp);
          HRESULT rc = pISignaturePad -> Connect(szwServerName);
          if ( ! ( S_OK == rc ) ) {
-            MessageBox(hwnd,L"There was an error connecting to the Android device",L"Note",MB_OK | MB_ICONEXCLAMATION);
+            BSTR bstrMessage;
+            pISignaturePad -> get_ConnectionProblemTroubleshooter(&bstrMessage);
+            WCHAR szwMessage[4096];
+            swprintf(szwMessage,L"There was an error connecting to the Android device.\n%ls",bstrMessage);
+            MessageBox(hwnd,szwMessage,L"Note",MB_OK | MB_ICONEXCLAMATION);
+            SysFreeString(bstrMessage);
             SetDlgItemText(hwnd,IDDI_PAD_KILLER_CONNECT_LABEL,L"Enter the IP address or network name of your Android device");
             break;
          }
